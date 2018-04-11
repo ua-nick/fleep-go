@@ -1,23 +1,116 @@
 package fleep
 
-import (
-	"encoding/json"
-	"io/ioutil"
-)
-
-const CollectionFile = "collection.json"
-
 type Collection struct {
-	Type      string   `json:"type"`
-	Extension string   `json:"extension"`
-	Mime      string   `json:"mime"`
-	Offset    int      `json:"offset"`
-	Signature []string `json:"signature"`
+	Type      string
+	Extension string
+	Mime      string
+	Offset    int
+	Signature []string
 }
 
-func ParseCollection() []Collection {
-	var collection []Collection
-	data, _ := ioutil.ReadFile(CollectionFile)
-	json.Unmarshal(data, &collection)
-	return collection
+var CollectionData = []Collection{
+	{Type: "raster-image", Extension: "bmp", Mime: "image/bmp", Offset: 0, Signature: []string{"42 4D"}},
+	{Type: "raster-image", Extension: "gif", Mime: "image/gif", Offset: 0, Signature: []string{"47 49 46 38"}},
+	{Type: "raster-image", Extension: "jpg", Mime: "image/jpeg", Offset: 0, Signature: []string{"FF D8 FF"}},
+	{Type: "raster-image", Extension: "jp2", Mime: "image/jp2", Offset: 0, Signature: []string{"00 00 00 0C 6A 50 20 20"}},
+	{Type: "raster-image", Extension: "png", Mime: "image/png", Offset: 0, Signature: []string{"89 50 4E 47 0D 0A 1A 0A"}},
+	{Type: "raster-image", Extension: "webp", Mime: "image/webp", Offset: 8, Signature: []string{"57 45 42 50"}},
+	{Type: "raster-image", Extension: "ico", Mime: "image/x-icon", Offset: 0, Signature: []string{"00 00 01 00"}},
+	{Type: "raster-image", Extension: "psd", Mime: "image/vnd.adobe.photoshop", Offset: 0, Signature: []string{"38 42 50 53"}},
+	{Type: "raster-image", Extension: "tiff", Mime: "image/tiff", Offset: 0, Signature: []string{"49 20 49", "49 49 2A 00", "4D 4D 00 2A", "4D 4D 00 2B"}},
+	{Type: "raw-image", Extension: "raw", Mime: "application/octet-stream", Offset: 0, Signature: []string{"49 49 55 00"}},
+	{Type: "raw-image", Extension: "arw", Mime: "application/octet-stream", Offset: 0, Signature: []string{"49 49 2A 00"}},
+	{Type: "raw-image", Extension: "x3f", Mime: "application/octet-stream", Offset: 0, Signature: []string{"46 4F 56 62"}},
+	{Type: "raw-image", Extension: "srw", Mime: "application/octet-stream", Offset: 0, Signature: []string{"4D 4D 00 2A"}},
+	{Type: "raw-image", Extension: "pef", Mime: "application/octet-stream", Offset: 0, Signature: []string{"4D 4D 00 2A"}},
+	{Type: "raw-image", Extension: "rw2", Mime: "application/octet-stream", Offset: 0, Signature: []string{"49 49 55 00"}},
+	{Type: "raw-image", Extension: "nef", Mime: "application/octet-stream", Offset: 0, Signature: []string{"4D 4D 00 2A"}},
+	{Type: "raw-image", Extension: "nrw", Mime: "application/octet-stream", Offset: 0, Signature: []string{"49 49 2A 00"}},
+	{Type: "raw-image", Extension: "raf", Mime: "application/octet-stream", Offset: 0, Signature: []string{"46 55 4A 49"}},
+	{Type: "raw-image", Extension: "erf", Mime: "application/octet-stream", Offset: 0, Signature: []string{"4D 4D 00 2A"}},
+	{Type: "raw-image", Extension: "crw", Mime: "application/octet-stream", Offset: 0, Signature: []string{"49 49 1A 00"}},
+	{Type: "raw-image", Extension: "cr2", Mime: "application/octet-stream", Offset: 0, Signature: []string{"49 49 2A 00"}},
+	{Type: "raw-image", Extension: "orf", Mime: "application/octet-stream", Offset: 0, Signature: []string{"49 49 52 4F", "49 49 52 53"}},
+	{Type: "raw-image", Extension: "dng", Mime: "application/octet-stream", Offset: 0, Signature: []string{"4D 4D 00 2A", "49 49 2A 00"}},
+	{Type: "vector-image", Extension: "ai", Mime: "application/postscript", Offset: 0, Signature: []string{"25 50 44 46"}},
+	{Type: "vector-image", Extension: "eps", Mime: "application/postscript", Offset: 0, Signature: []string{"C5 D0 D3 C6", "25 21 50 53 2D 41 64 6F"}},
+	{Type: "3d-image", Extension: "obj", Mime: "text/plain", Offset: 2, Signature: []string{"4D 61 78 32 4F 62 6A", "42 6C 65 6E 64 65 72"}},
+	{Type: "3d-image", Extension: "mtl", Mime: "text/plain", Offset: 2, Signature: []string{"4D 61 78 32 4D 74 6C", "42 6C 65 6E 64 65 72 20 4D 54 4C 20 46 69 6C 65"}},
+	{Type: "3d-image", Extension: "xsi", Mime: "text/plain", Offset: 0, Signature: []string{"78 73 69"}},
+	{Type: "3d-image", Extension: "ply", Mime: "text/plain", Offset: 50, Signature: []string{"70 6C 79"}},
+	{Type: "3d-image", Extension: "ma", Mime: "text/plain", Offset: 2, Signature: []string{"4D 61 79 61"}},
+	{Type: "3d-image", Extension: "wrl", Mime: "text/plain", Offset: 1, Signature: []string{"56 52 4D 4C"}},
+	{Type: "3d-image", Extension: "x3d", Mime: "application/xml", Offset: 50, Signature: []string{"58 33 44"}},
+	{Type: "3d-image", Extension: "fbx", Mime: "application/octet-stream", Offset: 2, Signature: []string{"46 42 58"}},
+	{Type: "3d-image", Extension: "ms3d", Mime: "application/octet-stream", Offset: 0, Signature: []string{"4D 53 33 44"}},
+	{Type: "3d-image", Extension: "c4d", Mime: "application/octet-stream", Offset: 0, Signature: []string{"58 43 34 44 43 34 44 36"}},
+	{Type: "audio", Extension: "aiff", Mime: "audio/aiff", Offset: 0, Signature: []string{"46 4F 52 4D 00"}},
+	{Type: "audio", Extension: "aac", Mime: "audio/aac", Offset: 0, Signature: []string{"FF F1", "FF F9"}},
+	{Type: "audio", Extension: "midi", Mime: "audio/midi", Offset: 0, Signature: []string{"4D 54 68 64"}},
+	{Type: "audio", Extension: "mp3", Mime: "audio/mpeg", Offset: 0, Signature: []string{"49 44 33"}},
+	{Type: "audio", Extension: "m4a", Mime: "audio/mp4", Offset: 4, Signature: []string{"66 74 79 70 4D 34 41 20"}},
+	{Type: "audio", Extension: "oga", Mime: "audio/ogg", Offset: 0, Signature: []string{"4F 67 67 53 00 02 00 00"}},
+	{Type: "audio", Extension: "wav", Mime: "audio/wav", Offset: 0, Signature: []string{"52 49 46 46"}},
+	{Type: "audio", Extension: "wma", Mime: "audio/x-ms-wma", Offset: 0, Signature: []string{"30 26 B2 75 8E 66 CF 11"}},
+	{Type: "audio", Extension: "flac", Mime: "audio/flac", Offset: 0, Signature: []string{"66 4C 61 43 00 00 00 22"}},
+	{Type: "audio", Extension: "mka", Mime: "audio/x-matroska", Offset: 31, Signature: []string{"6D 61 74 72 6F 73 6B 61"}},
+	{Type: "audio", Extension: "au", Mime: "audio/basic", Offset: 0, Signature: []string{"2E 73 6E 64"}},
+	{Type: "audio", Extension: "ra", Mime: "application/octet-stream", Offset: 0, Signature: []string{"2E 52 4D 46"}},
+	{Type: "audio", Extension: "amr", Mime: "application/octet-stream", Offset: 0, Signature: []string{"23 21 41 4D"}},
+	{Type: "audio", Extension: "ac3", Mime: "application/octet-stream", Offset: 0, Signature: []string{"0B 77"}},
+	{Type: "audio", Extension: "voc", Mime: "application/octet-stream", Offset: 0, Signature: []string{"43 72 65 61 74 69 76 65"}},
+	{Type: "video", Extension: "3g2", Mime: "video/3gpp2", Offset: 4, Signature: []string{"66 74 79 70 33 67 70"}},
+	{Type: "video", Extension: "3gp", Mime: "video/3gpp", Offset: 4, Signature: []string{"66 74 79 70 33 67 70"}},
+	{Type: "video", Extension: "avi", Mime: "video/avi", Offset: 8, Signature: []string{"41 56 49 20 4C 49 53 54"}},
+	{Type: "video", Extension: "flv", Mime: "video/x-flv", Offset: 0, Signature: []string{"46 4C 56"}},
+	{Type: "video", Extension: "m4v", Mime: "video/mp4", Offset: 4, Signature: []string{"66 74 79 70 4D 34 56 20", "66 74 79 70 6D 70 34 32"}},
+	{Type: "video", Extension: "mkv", Mime: "video/x-matroska", Offset: 31, Signature: []string{"6D 61 74 72 6F 73 6B 61"}},
+	{Type: "video", Extension: "mov", Mime: "video/quicktime", Offset: 4, Signature: []string{"66 74 79 70 71 74 20 20", "6D 6F 6F 76", "66 72 65 65", "6D 64 61 74", "77 69 64 65", "70 6E 6F 74", "73 6B 69 70"}},
+	{Type: "video", Extension: "mp4", Mime: "video/mp4", Offset: 4, Signature: []string{"66 74 79 70 4D 53 4E 56", "66 74 79 70 69 73 6F 6D"}},
+	{Type: "video", Extension: "swf", Mime: "application/vnd.adobe.flash-movie", Offset: 0, Signature: []string{"43 57 53", "46 57 53"}},
+	{Type: "video", Extension: "mpg", Mime: "video/mpeg", Offset: 0, Signature: []string{"00 00 01 BA"}},
+	{Type: "video", Extension: "vob", Mime: "video/dvd", Offset: 0, Signature: []string{"00 00 01 BA"}},
+	{Type: "video", Extension: "wmv", Mime: "video/x-ms-wmv", Offset: 0, Signature: []string{"30 26 B2 75 8E 66 CF 11"}},
+	{Type: "video", Extension: "asf", Mime: "video/x-ms-asf", Offset: 0, Signature: []string{"30 26 B2 75 8E 66 CF 11"}},
+	{Type: "video", Extension: "ogv", Mime: "video/ogg", Offset: 0, Signature: []string{"4F 67 67 53 00 02 00 00"}},
+	{Type: "video", Extension: "webm", Mime: "video/webm", Offset: 0, Signature: []string{"1A 45 DF A3"}},
+	{Type: "document", Extension: "odt", Mime: "application/vnd.oasis.opendocument.text", Offset: 73, Signature: []string{"74 65 78 74"}},
+	{Type: "document", Extension: "odp", Mime: "application/vnd.oasis.opendocument.presentation", Offset: 73, Signature: []string{"70 72 65 73 65 6E 74 61 74 69 6F 6E"}},
+	{Type: "document", Extension: "ods", Mime: "application/vnd.oasis.opendocument.spreadsheet", Offset: 73, Signature: []string{"73 70 72 65 61 64 73 68 65 65 74"}},
+	{Type: "document", Extension: "doc", Mime: "application/vnd.ms-excel", Offset: 0, Signature: []string{"D0 CF 11 E0 A1 B1 1A E1", "50 4B 03 04 14 00 06 00"}},
+	{Type: "document", Extension: "pps", Mime: "application/vnd.ms-powerpoint", Offset: 0, Signature: []string{"D0 CF 11 E0 A1 B1 1A E1", "50 4B 03 04 14 00 06 00"}},
+	{Type: "document", Extension: "ppt", Mime: "application/vnd.ms-powerpoint", Offset: 0, Signature: []string{"D0 CF 11 E0 A1 B1 1A E1", "50 4B 03 04 14 00 06 00"}},
+	{Type: "document", Extension: "xls", Mime: "application/vnd.ms-excel", Offset: 0, Signature: []string{"D0 CF 11 E0 A1 B1 1A E1", "50 4B 03 04 14 00 06 00"}},
+	{Type: "document", Extension: "docx", Mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", Offset: 0, Signature: []string{"D0 CF 11 E0 A1 B1 1A E1", "50 4B 03 04 14 00 06 00"}},
+	{Type: "document", Extension: "pptx", Mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation", Offset: 0, Signature: []string{"D0 CF 11 E0 A1 B1 1A E1", "50 4B 03 04 14 00 06 00"}},
+	{Type: "document", Extension: "xlsx", Mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", Offset: 0, Signature: []string{"D0 CF 11 E0 A1 B1 1A E1", "50 4B 03 04 14 00 06 00"}},
+	{Type: "document", Extension: "pages", Mime: "application/zip", Offset: 0, Signature: []string{"50 4B 03 04"}},
+	{Type: "document", Extension: "key", Mime: "application/zip", Offset: 0, Signature: []string{"50 4B 03 04"}},
+	{Type: "document", Extension: "numbers", Mime: "application/zip", Offset: 0, Signature: []string{"50 4B 03 04"}},
+	{Type: "document", Extension: "pdf", Mime: "application/pdf", Offset: 0, Signature: []string{"25 50 44 46"}},
+	{Type: "document", Extension: "rtf", Mime: "application/rtf", Offset: 0, Signature: []string{"7B 5C 72 74 66 31"}},
+	{Type: "document", Extension: "epub", Mime: "application/epub+zip", Offset: 0, Signature: []string{"50 4B 03 04"}},
+	{Type: "document", Extension: "xml", Mime: "application/xml", Offset: 2, Signature: []string{"78 6D 6C"}},
+	{Type: "archive", Extension: "7z", Mime: "application/x-7z-compressed", Offset: 0, Signature: []string{"37 7A BC AF 27 1C"}},
+	{Type: "archive", Extension: "rar", Mime: "application/vnd.rar", Offset: 0, Signature: []string{"52 61 72 21 1A 07 00", "52 61 72 21 1A 07 01 00"}},
+	{Type: "archive", Extension: "tar.z", Mime: "application/x-compress", Offset: 0, Signature: []string{"1F 9D", "1F A0"}},
+	{Type: "archive", Extension: "gz", Mime: "application/gzip", Offset: 0, Signature: []string{"1F 8B 08"}},
+	{Type: "archive", Extension: "zip", Mime: "application/zip", Offset: 0, Signature: []string{"50 4B 03 04", "50 4B 05 06", "50 4B 07 08"}},
+	{Type: "archive", Extension: "dmg", Mime: "application/x-apple-diskimage", Offset: 0, Signature: []string{"78 01 73 0D 62 62 60"}},
+	{Type: "archive", Extension: "iso", Mime: "application/octet-stream", Offset: 0, Signature: []string{"43 49 53 4F", "43 44 30 30 31"}},
+	{Type: "executable", Extension: "com", Mime: "application/x-msdownload", Offset: 0, Signature: []string{"4D 5A"}},
+	{Type: "executable", Extension: "exe", Mime: "application/vnd.microsoft.portable-executable", Offset: 0, Signature: []string{"4D 5A 90 00"}},
+	{Type: "executable", Extension: "jar", Mime: "application/java-archive", Offset: 0, Signature: []string{"50 4B 03 04"}},
+	{Type: "font", Extension: "ttf", Mime: "font/ttf", Offset: 0, Signature: []string{"00 01 00 00"}},
+	{Type: "font", Extension: "otf", Mime: "font/otf", Offset: 0, Signature: []string{"4F 54 54 4F"}},
+	{Type: "font", Extension: "woff", Mime: "font/woff", Offset: 0, Signature: []string{"77 4F 46 46"}},
+	{Type: "font", Extension: "woff2", Mime: "font/woff2", Offset: 0, Signature: []string{"77 4F 46 32"}},
+	{Type: "system", Extension: "cab", Mime: "application/vnd.ms-cab-compressed", Offset: 0, Signature: []string{"4D 53 43 46"}},
+	{Type: "system", Extension: "cat", Mime: "application/vnd.microsoft.portable-executable", Offset: 0, Signature: []string{"30 82"}},
+	{Type: "system", Extension: "dll", Mime: "application/vnd.microsoft.portable-executable", Offset: 0, Signature: []string{"4D 5A 90 00"}},
+	{Type: "system", Extension: "drv", Mime: "application/vnd.microsoft.portable-executable", Offset: 0, Signature: []string{"4D 5A 90 00"}},
+	{Type: "system", Extension: "sdb", Mime: "application/vnd.microsoft.portable-executable", Offset: 8, Signature: []string{"73 64 62 66"}},
+	{Type: "system", Extension: "sys", Mime: "application/vnd.microsoft.portable-executable", Offset: 0, Signature: []string{"4D 5A 80 00", "4D 5A 90 00"}},
+	{Type: "system", Extension: "reg", Mime: "application/vnd.microsoft.portable-executable", Offset: 0, Signature: []string{"52 45 47 45 44 49 54", "57 69 6E 64 6F 77 73 20 52 65 67 69 73 74 72 79"}},
+	{Type: "database", Extension: "sqlite", Mime: "application/x-sqlite3", Offset: 0, Signature: []string{"53 51 4C 69 74 65 20 66 6F 72 6D 61 74 20 33 00"}},
 }

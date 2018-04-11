@@ -8,8 +8,6 @@ import (
 
 const SequenceLength = 128
 
-var CollectionData = ParseCollection()
-
 type Info struct {
 	Type      []string
 	Extension []string

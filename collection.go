@@ -113,4 +113,10 @@ var CollectionData = []Collection{
 	{Type: "system", Extension: "sys", Mime: "application/vnd.microsoft.portable-executable", Offset: 0, Signature: []string{"4D 5A 80 00", "4D 5A 90 00"}},
 	{Type: "system", Extension: "reg", Mime: "application/vnd.microsoft.portable-executable", Offset: 0, Signature: []string{"52 45 47 45 44 49 54", "57 69 6E 64 6F 77 73 20 52 65 67 69 73 74 72 79"}},
 	{Type: "database", Extension: "sqlite", Mime: "application/x-sqlite3", Offset: 0, Signature: []string{"53 51 4C 69 74 65 20 66 6F 72 6D 61 74 20 33 00"}},
+	{Type: "cad", Extension: "dwg", Mime: "aplication/acad (AutoCAD 2000)", Offset: 0, Signature: []string{"41 43 31 30 31 35"}}, // AC1015
+	{Type: "cad", Extension: "dwg", Mime: "aplication/acad (AutoCAD 2004)", Offset: 0, Signature: []string{"41 43 31 30 31 38"}}, // AC1018
+	{Type: "cad", Extension: "dwg", Mime: "aplication/acad (AutoCAD 2007)", Offset: 0, Signature: []string{"41 43 31 30 32 31"}}, // AC1021
+	{Type: "cad", Extension: "dwg", Mime: "aplication/acad (AutoCAD 2010)", Offset: 0, Signature: []string{"41 43 31 30 32 34"}}, // AC1024
+	{Type: "cad", Extension: "dwg", Mime: "aplication/acad (AutoCAD 2013)", Offset: 0, Signature: []string{"41 43 31 30 32 37"}}, // AC1032
+	{Type: "cad", Extension: "dwg", Mime: "aplication/acad (AutoCAD 2018)", Offset: 0, Signature: []string{"41 43 31 30 33 32"}}, // AC1032
 }

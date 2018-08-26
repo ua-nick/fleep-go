@@ -1,6 +1,6 @@
 package fleep
 
-type Collection struct {
+type collection struct {
 	Type      string
 	Extension string
 	Mime      string
@@ -8,7 +8,7 @@ type Collection struct {
 	Signature [][]byte
 }
 
-var CollectionData = []Collection{
+var collectionData = []collection{
 	{Type: "raster-image", Extension: "bmp", Mime: "image/bmp", Offset: 0, Signature: [][]byte{{0x42, 0x4D}}},
 	{Type: "raster-image", Extension: "gif", Mime: "image/gif", Offset: 0, Signature: [][]byte{{0x47, 0x49, 0x46, 0x38}}},
 	{Type: "raster-image", Extension: "jpg", Mime: "image/jpeg", Offset: 0, Signature: [][]byte{{0xFF, 0xD8, 0xFF}}},

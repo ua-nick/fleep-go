@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-const SequenceLength = 128
+const sequenceLength = 128
 
 type Info struct {
 	Type      []string
@@ -51,8 +51,8 @@ func GetInfo(file []byte) (Info, error) {
 	if len(file) < 128 {
 		return info, errors.New("not enough bytes")
 	}
-	sequence := file[:SequenceLength]
-	for _, item := range CollectionData {
+	sequence := file[:sequenceLength]
+	for _, item := range collectionData {
 		for _, signature := range item.Signature {
 			if bytes.Equal(sequence[item.Offset:item.Offset+len(signature)], signature) {
 				info.Type = append(info.Type, item.Type)

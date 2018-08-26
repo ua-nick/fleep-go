@@ -1,9 +1,8 @@
 package fleep
 
 import (
-	"encoding/hex"
+	"bytes"
 	"errors"
-	"strings"
 )
 
 const SequenceLength = 128
@@ -52,11 +51,10 @@ func GetInfo(file []byte) (Info, error) {
 	if len(file) < 128 {
 		return info, errors.New("not enough bytes")
 	}
-	sequence := strings.ToUpper(hex.EncodeToString(file[:SequenceLength]))
+	sequence := file[:SequenceLength]
 	for _, item := range CollectionData {
 		for _, signature := range item.Signature {
-			signature = strings.Replace(signature, " ", "", -1)
-			if sequence[item.Offset:item.Offset+len(signature)] == signature {
+			if bytes.Equal(sequence[item.Offset:item.Offset+len(signature)], signature) {
 				info.Type = append(info.Type, item.Type)
 				info.Extension = append(info.Extension, item.Extension)
 				info.Mime = append(info.Mime, item.Mime)

@@ -1,6 +1,6 @@
 # fleep
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/floyernick/fleep-go)](https://goreportcard.com/report/github.com/floyernick/fleep-go) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/floyernick/fleep-go/blob/master/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/floyernick/fleep-go)](https://goreportcard.com/report/github.com/floyernick/fleep-go) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/floyernick/fleep-go/blob/master/LICENSE) [![PkgGoDev](https://pkg.go.dev/badge/github.com/floyernick/fleep-go)](https://pkg.go.dev/github.com/floyernick/fleep-go)
 
 File format determination package for Go
 
@@ -18,21 +18,21 @@ go get github.com/floyernick/fleep-go
 
 ## Usage
 
-Main function `GetInfo()` determines file format. It takes byte sequence (>=128) as an argument and returns `Info` structure.
+Main function `GetInfo` determines file format. It takes file as a byte sequence and returns info about file.
 
 `Info` has the following fields:
 
--  `Type` ([]string) -> list of suitable file types
--  `Extension` ([]string) -> list of suitable file extensions
--  `Mime` ([]string) -> list of suitable file MIME types
+-  `Type` -> list of suitable file types
+-  `Extension` -> list of suitable file extensions
+-  `Mime` -> list of suitable file MIME types
 
 Also `Info` has the following methods:
 
--  `TypeMatches()` -> checks if file type matches with given type as an argument
--  `ExtensionMatches()` -> checks if file extension matches with given extension as an argument
--  `MimeMatches()` -> checks if file MIME type matches with given MIME type as an argument
+-  `TypeMatches` -> checks if file type matches with given type as an argument
+-  `ExtensionMatches` -> checks if file extension matches with given extension as an argument
+-  `MimeMatches` -> checks if file MIME type matches with given MIME type as an argument
 
-There is an example:
+There is an example (error handling omitted):
 
 ```
 package main
@@ -44,14 +44,14 @@ import (
 )
 
 func main() {
-	file, _ := ioutil.ReadFile("gopher.png")      // Reads PNG file
-	info, _ := fleep.GetInfo(file)                // Gets file format
-	fmt.Println(info.Type)                        // Prints [raster-image]
-	fmt.Println(info.Extension)                   // Prints [png]
-	fmt.Println(info.Mime)                        // Prints [image/png]
-	fmt.Println(info.TypeMatches("raster-image")) // Prints true
-	fmt.Println(info.ExtensionMatches("jpg"))     // Prints false
-	fmt.Println(info.MimeMatches("image/png"))    // Prints true
+	file, _ := ioutil.ReadFile("gopher.png")        // Reads PNG file
+	info, _ := fleep.GetInfo(file)                  // Gets file format
+	fmt.Println(info.Type)                          // Prints [raster-image]
+	fmt.Println(info.Extension)                     // Prints [png]
+	fmt.Println(info.Mime)                          // Prints [image/png]
+	fmt.Println(info.TypeMatches(fleep.RasterImage) // Prints true
+	fmt.Println(info.ExtensionMatches("jpg"))       // Prints false
+	fmt.Println(info.MimeMatches("image/png"))      // Prints true
 }
 
 ```

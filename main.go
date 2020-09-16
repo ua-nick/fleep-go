@@ -5,6 +5,7 @@ import (
 	"errors"
 )
 
+// GetInfo returns file info
 func GetInfo(file []byte) (Info, error) {
 
 	var info Info

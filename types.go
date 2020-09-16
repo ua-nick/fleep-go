@@ -1,5 +1,6 @@
 package fleep
 
+// FileType represents supported file type
 type FileType int
 
 const (

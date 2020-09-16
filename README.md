@@ -1,6 +1,6 @@
 # fleep
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/floyernick/fleep-go)](https://goreportcard.com/report/github.com/floyernick/fleep-go) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/floyernick/fleep-go/blob/master/LICENSE) [![PkgGoDev](https://pkg.go.dev/badge/github.com/floyernick/fleep-go)](https://pkg.go.dev/github.com/floyernick/fleep-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/floyernick/fleep-go)](https://goreportcard.com/report/github.com/floyernick/fleep-go) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/floyernick/fleep-go/blob/master/LICENSE) [![PkgGoDev](https://pkg.go.dev/badge/github.com/floyernick/fleep-go)](https://pkg.go.dev/github.com/floyernick/fleep-go) ![Version](https://img.shields.io/badge/version-1.0.0-green)
 
 File format determination package for Go
 
